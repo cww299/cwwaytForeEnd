@@ -10,7 +10,14 @@ module.exports = {
     // Paths
     assetsSubDirectory: 'static',
     assetsPublicPath: '/',
-    proxyTable: {},
+    proxyTable: {
+      // api映射
+      '/api': {   //替换代理地址名称 , 即/api/helloYt 接口代理为：http://localhost:8820/heollYt
+        target: 'http://localhost:8820/',   //代理地址
+        changeOrigin: true,             //开启代理、是否可跨域
+        pathRewrite: { "^/api": "" }    //重写接口，去掉/api
+      }
+    },
 
     // Various Dev Server settings
     host: 'localhost', // can be overwritten by process.env.HOST
