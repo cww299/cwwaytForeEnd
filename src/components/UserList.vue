@@ -22,8 +22,10 @@
                        align="center"></el-table-column>
       <el-table-column label="操作"
                        align="center">
-        <el-button size="mini">编辑</el-button><!-- @click="handleEdit(scope.$index, scope.row)"-->
-        <el-button size="mini" type="danger">删除</el-button>
+        <template slot-scope="scope">
+          <el-button size="mini" @click="editUser(scope.$index, scope.row)">编辑</el-button>
+          <el-button size="mini" type="danger">删除</el-button>
+        </template>
       </el-table-column>
     </el-table>
     <div class="block">
@@ -84,6 +86,11 @@ export default {
     jumpPage: function(val){
       this.page.currPage = val;
       this.submitForm('userForm');
+    },
+    editUser: function(index,data){
+      this.$router.replace('editUser')
+      console.log(index)
+      console.log(data)
     }
   }
 }
