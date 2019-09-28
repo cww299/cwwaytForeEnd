@@ -9,7 +9,7 @@ module.exports = {
     assetsSubDirectory: 'static',  // 编译输出的二级目录
     assetsPublicPath: '/',      // 编译发布的根目录，可配置为资源服务器域名或 CDN 域名
     proxyTable: {      // 代理接口（可跨域）
-      '/api': {   //替换代理地址名称 , 即/api/helloYt 接口代理为：http://localhost:8820/heollYt
+     '/api': {   //替换代理地址名称 , 即/api/helloYt 接口代理为：http://localhost:8820/heollYt
         target: 'http://localhost:8820/',   //代理地址
         changeOrigin: true,             //开启代理、是否可跨域
         pathRewrite: { "^/api": "" }    //重写接口，去掉/api

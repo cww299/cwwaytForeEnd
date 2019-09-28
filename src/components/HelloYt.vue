@@ -1,7 +1,7 @@
 <template>
   <el-container class="containerBody">
 
-    <div class="containerAside">
+    <div :class="{'menuCollapse':isCollapse,'containerAside':true }">
       <el-menu
         :collapse="isCollapse"
         default-active="2"
@@ -174,7 +174,9 @@ export default {
     width: 200px;
     overflow-x: hidden;
   }
-
+  .menuCollapse{
+    width: 60px;
+  }
 
   .containerAside .el-menu:not(.el-menu--collapse) {
     width: 217px;
@@ -183,6 +185,7 @@ export default {
   }
   .el-menu{
     border-right:none;
+    text-align: left;
   }
   .el-carousel__item h3 {
     color: #475669;
@@ -201,6 +204,9 @@ export default {
   @media screen and (max-width: 480px){
     .el-menu--collapse {
       overflow: hidden;
+    }
+    .menuCollapse{
+      width: 0px;
     }
   }
 </style>
