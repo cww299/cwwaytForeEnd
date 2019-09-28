@@ -3,9 +3,8 @@
 
     <div :class="{'menuCollapse':isCollapse,'containerAside':true }">
       <el-menu
-        :collapse="isCollapse"
-        default-active="2"
-        background-color="#545c64"
+        :collapse="isCollapse" default-active="2"
+        background-color="#393D49"
         text-color="#fff"
         active-text-color="#ffd04b">
         <el-submenu index="1">
@@ -66,7 +65,8 @@
         </div>
       </el-header>
 
-      <el-main>
+      <el-main >
+        <div :class="{'blackDiv':!isCollapse}"></div>
         {{ dataTime.day }}天{{ dataTime.hour }}时{{ dataTime.min }}分{{ dataTime.second }}秒
         <template>
           <el-carousel :interval="4000" type="card" height="500px">
@@ -158,10 +158,11 @@ export default{
     color: white;
     padding: 20px;
     box-sizing: border-box;
+    font-size: 16px;
   }
   .containerHeader span:hover{
     color:#0099ff;
-    border-top:2px solid white;
+    border-top:3px solid #03a9f4ab
   }
   .containerHeader .rightDiv{
     float:right;
@@ -170,7 +171,7 @@ export default{
     float:left;
   }
   .containerAside{
-    background-color: #545c64;
+    background-color: #393D49;
     width: 200px;
     overflow-x: hidden;
   }
@@ -201,12 +202,23 @@ export default{
   .el-carousel__item:nth-child(2n+1) {
     background-color: #d3dce6;
   }
-  @media screen and (max-width: 480px){
+  @media screen and (max-width: 480px) {
     .el-menu--collapse {
       overflow: hidden;
     }
-    .menuCollapse{
+
+    .menuCollapse {
       width: 0px;
+    }
+    .blackDiv{
+      background: rgba(0, 0, 0, 0.8);
+      width: 100%;
+      height: 100%;
+      position: absolute;
+      z-index: 99999;
+    }
+    .el-main {
+      padding:0px;
     }
   }
 </style>
