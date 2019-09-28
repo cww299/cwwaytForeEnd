@@ -84,10 +84,10 @@
 </template>
 
 <script>
-export default {
+export default{
   data() {
-    let date1 = new Date('2018/09/14 18:00:00')
-    let date2 = new Date()
+    let date1 = new Date('2018/09/14 18:00:00');
+    let date2 = new Date();
     let s1 = date1.getTime(),s2 = date2.getTime();
     let total = (s2 - s1)/1000;
     let day = parseInt(total / (24*60*60));//计算整数天数
@@ -103,10 +103,11 @@ export default {
         hour:hour,
         min:min,
         second:second,
+
       },
       isCollapse: false,
       user:{
-        username:'cww'
+        username:'cww1'
       }
     }
 
@@ -130,7 +131,7 @@ export default {
     }, 1000);
   },
   methods:{
-    collapseTrans:function(obj){
+    collapseTrans:function(){
       let self = this;
       if(self.isCollapse){
 
@@ -143,7 +144,6 @@ export default {
 <style>
   .containerBody{
     border: none;
-    bottom: 0px;
     height: 100%;
   }
   .containerHeader{
@@ -154,7 +154,7 @@ export default {
   }
   .containerHeader span{
     cursor: pointer;
-    margin: 0px 8px;
+    margin: 0 8px;
     color: white;
     padding: 20px;
     box-sizing: border-box;
