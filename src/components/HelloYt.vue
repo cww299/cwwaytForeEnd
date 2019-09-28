@@ -107,7 +107,7 @@ export default {
       },
       isCollapse: false,
       user:{
-        username:'cww'
+        username:'cww1'
       }
     }
 
