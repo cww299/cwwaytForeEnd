@@ -1,16 +1,17 @@
 <template>
   <el-container class="containerBody">
 
-    <div :class="{'menuCollapse':isCollapse,'containerAside':true }">
+    <div :class="[{'menuCollapse': $store.isCollapse },'containerAside']">
+
       <el-menu
-        :collapse="isCollapse" default-active="2"
+        :collapse="$store.isCollapse" default-active="2"
         background-color="#393D49"
         text-color="#fff"
         active-text-color="#ffd04b">
         <el-submenu index="1">
           <template slot="title">
             <i class="el-icon-location"></i>
-            <span>导航一</span>
+            <span>导航一{{$store}}</span>
           </template>
           <el-menu-item-group>
             <template slot="title">分组一</template>
@@ -59,7 +60,7 @@
           </span>
           <el-dropdown>
             <span class="el-dropdown-link">
-              <i class="el-icon-user">&nbsp;{{user.username}}</i>
+              <i class="el-icon-user">&nbsp;cww2</i>
             </span>
             <el-dropdown-menu slot="dropdown">
               <el-dropdown-item>个人信息</el-dropdown-item>
@@ -84,10 +85,7 @@
 export default{
   data() {
     return {
-      isCollapse: false,
-      user:{
-        username:'cww2'
-      }
+
     }
 
   },
@@ -96,11 +94,7 @@ export default{
   },
   methods:{
     collapseTrans:function(){
-      let self = this;
-      if(self.isCollapse){
 
-      }
-      self.isCollapse = !self.isCollapse;
     }
   },
 }
