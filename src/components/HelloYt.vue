@@ -66,7 +66,7 @@
       </el-header>
 
       <el-main >
-        <div :class="{'blackDiv':!isCollapse}"></div>
+        <div :class="{'blackDiv':!isCollapse}" @click="collapseTrans"></div>
         {{ dataTime.day }}天{{ dataTime.hour }}时{{ dataTime.min }}分{{ dataTime.second }}秒
         <template>
           <el-carousel :interval="4000" type="card" height="500px">
