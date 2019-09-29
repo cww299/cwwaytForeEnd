@@ -1,7 +1,7 @@
 <!-- helloYt首页模块 -->
 <template>
   <div>
-    <div :class="{'blackDiv':!isCollapse}" @click="collapseTrans"></div>
+    <div :class="{'blackDiv':!this.$store.isCollapse }" @click=""></div>
     {{ dataTime.day }}天{{ dataTime.hour }}时{{ dataTime.min }}分{{ dataTime.second }}秒
     <template>
       <el-carousel :interval="4000" type="card" height="500px">
@@ -34,22 +34,16 @@
           second: second,
 
         },
-        isCollapse: false,
-        user: {
-          username: 'cww2'
-        }
       }
     },
     methods:{
       collapseTrans:function(){
-        let self = this;
-        if(self.isCollapse){
 
-        }
-        self.isCollapse = !self.isCollapse;
       }
     },
     mounted() {
+
+
       let self = this.dataTime;
       setInterval(function(){
         self.second++;

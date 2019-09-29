@@ -10,7 +10,10 @@ export default {
   name: 'App',
   data(){
     return {}
-  }
+  },
+  mounted:function(){
+    this.$store.isCollapse = false;
+  },
 }
 </script>
 
