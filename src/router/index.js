@@ -4,6 +4,7 @@ import UserList from '@/components/UserList'
 import EditUser from '@/components/EditUser'
 import HelloYt from '@/components/HelloYt'
 import Login from '@/components/Login'
+import Index from '@/components/helloYt/index'
 
 Vue.use(Router)
 
@@ -18,6 +19,14 @@ export default new Router({
       path:'/helloYt',
       name:'helloYt',
       component: HelloYt,
+      redirect:'/helloYt/index',
+      children:[
+        {
+          path: 'index',
+          component: Index,
+        }
+
+      ]
     },
     {
       path: '/user/userList',
@@ -25,7 +34,7 @@ export default new Router({
       component: UserList
     },
     {
-      path: '/editUser',
+      path: '/user/editUser',
       name: 'editUser',
       component: EditUser,
     }

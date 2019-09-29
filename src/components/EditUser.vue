@@ -1,13 +1,20 @@
 <template>
-  <span>试</span>
+
+  <div>
+    <p>dasdasdasd</p>
+    <span>测试啊试</span>
+  </div>
 </template>
 
 <script>
   export default  {
-  name: 'editUser',
-  data () {
+    name: 'editUser',
+    data () {
+      return {}
+    },
+    methods:{
 
-  },
+    },
 }
 </script>
 
