@@ -44,10 +44,14 @@
     <el-container>
       <el-header class="containerHeader">
         <div class="leftDiv">
-        <span @click="collapseTrans">
-          <i class="el-icon-s-fold"></i>
-        </span>
-
+          <span>
+            <router-link to="/helloYt/index">
+              <i class="el-icon-house"></i>
+            </router-link>
+          </span>
+          <span @click="collapseTrans">
+            <i class="el-icon-s-fold"></i>
+          </span>
         </div>
         <div class="rightDiv">
           <span>
@@ -65,16 +69,10 @@
         </div>
       </el-header>
 
-      <el-main >
-        <div :class="{'blackDiv':!isCollapse}" @click="collapseTrans"></div>
-        {{ dataTime.day }}天{{ dataTime.hour }}时{{ dataTime.min }}分{{ dataTime.second }}秒
-        <template>
-          <el-carousel :interval="4000" type="card" height="500px">
-            <el-carousel-item v-for="item in 6" :key="item">
-              <h3 class="medium">{{ item }}</h3>
-            </el-carousel-item>
-          </el-carousel>
-        </template>
+      <el-main>
+
+        <router-view/>
+
       </el-main>
 
     </el-container>
@@ -85,25 +83,7 @@
 <script>
 export default{
   data() {
-    let date1 = new Date('2018/09/14 18:00:00');
-    let date2 = new Date();
-    let s1 = date1.getTime(),s2 = date2.getTime();
-    let total = (s2 - s1)/1000;
-    let day = parseInt(total / (24*60*60));//计算整数天数
-    let afterDay = total - day*24*60*60;//取得算出天数后剩余的秒数
-    let hour = parseInt(afterDay/(60*60));//计算整数小时数
-    let afterHour = total - day*24*60*60 - hour*60*60;//取得算出小时数后剩余的秒数
-    let min = parseInt(afterHour/60);//计算整数分
-    let second = parseInt(total - day*24*60*60 - hour*60*60 - min*60);//取得算出分后剩余的秒数
-
     return {
-      dataTime:{
-        day: day,
-        hour:hour,
-        min:min,
-        second:second,
-
-      },
       isCollapse: false,
       user:{
         username:'cww2'
@@ -112,22 +92,7 @@ export default{
 
   },
   mounted:function(){
-    let self = this.dataTime;
-    setInterval(function(){
-      self.second++;
-      if(self.second===60){
-        self.second = 0;
-        self.min++;
-        if(self.min===60){
-          self.min=0;
-          self.hour++;
-          if(self.hour===24){
-            self.hour=0;
-            self.day++;
-          }
-        }
-      }
-    }, 1000);
+
   },
   methods:{
     collapseTrans:function(){
@@ -137,7 +102,7 @@ export default{
       }
       self.isCollapse = !self.isCollapse;
     }
-  }
+  },
 }
 </script>
 <style>
@@ -159,6 +124,13 @@ export default{
     box-sizing: border-box;
     font-size: 16px;
   }
+ /* 路由跳转样式
+  .containerHeader span a{
+    color: white;
+  }
+  .containerHeader span:hover a{
+    color:#0099ff;
+  }*/
   .containerHeader span:hover{
     color:#0099ff;
     border-top:3px solid #03a9f4ab
