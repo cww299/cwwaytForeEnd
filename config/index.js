@@ -16,7 +16,7 @@ module.exports = {
       }
     },
     host: 'localhost', // can be overwritten by process.env.HOST
-    port: 8080, // 运行测试页面的端口
+    port: 8081, // 运行测试页面的端口
     autoOpenBrowser: false,
     errorOverlay: true,
     notifyOnErrors: true,
