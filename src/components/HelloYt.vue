@@ -48,9 +48,12 @@
           <span>
             <i class="el-icon-setting"></i>
           </span>
+          <span :click="fullScreen">
+            <i class="el-icon-full-screen"></i>
+          </span>
           <el-dropdown @command="dropdownAction">
             <span class="el-dropdown-link">
-              <i class="el-icon-user">&nbsp;cww2</i>
+              <i class="el-icon-user">&nbsp;{{user.userName}}</i>
             </span>
             <el-dropdown-menu slot="dropdown">
               <el-dropdown-item>个人信息</el-dropdown-item>
@@ -72,6 +75,9 @@ export default{
   data() {
     return {
       isCollapse:false,
+      user:{
+        userName:'',
+      },
     }
   },
   methods:{
@@ -99,9 +105,12 @@ export default{
       this.$router.push({
         path: '/'+indexPath[0]+'/'+indexPath[1]
       })
+    },
+    fullScreen:function(){
     }
   },
   mounted:function(){
+    this.user = this.$route.query;
   },
 }
 </script>
@@ -118,9 +127,8 @@ export default{
   }
   .containerHeader span{
     cursor: pointer;
-    margin: 0 8px;
     color: white;
-    padding: 20px;
+    padding: 15px;
     box-sizing: border-box;
     font-size: 16px;
   }

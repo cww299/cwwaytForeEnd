@@ -43,7 +43,9 @@ export default{
           axios.get('/api/login',{ params: self.loginForm  }).then((r)=>{
             r = r.data;
             if(r.code === 0){
-              this.$router.replace('helloYt')
+              this.$router.replace({path:'helloYt',
+                query:{userName:self.loginForm.username},
+              })
             }else{
               self.$message.error('账号或密码错误！');
             }
