@@ -24,7 +24,11 @@ export default new Router({
         {
           path: 'index',
           component: Index,
-        }
+        },
+        {
+          path: 'sys/user',
+          component: UserList,
+        },
 
       ]
     },

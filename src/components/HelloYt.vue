@@ -1,23 +1,19 @@
 <template>
   <el-container class="containerBody">
-
-    <div :class="[{'menuCollapse': $store.isCollapse },'containerAside']">
-
+    <div :class="[{'menuCollapse': isCollapse },'containerAside']">
       <el-menu
-        :collapse="$store.isCollapse" default-active="2"
+        :collapse="isCollapse" default-active="index"
         background-color="#393D49"
         text-color="#fff"
+        @select = 'selectMenu'
         active-text-color="#ffd04b">
-        <el-submenu index="1">
+        <el-submenu index="helloYt">
           <template slot="title">
             <i class="el-icon-location"></i>
-            <span>导航一{{$store}}</span>
+            <span>系统</span>
           </template>
-          <el-menu-item-group>
-            <template slot="title">分组一</template>
-            <el-menu-item index="1-1">选项1</el-menu-item>
-            <el-menu-item index="1-2">选项2</el-menu-item>
-          </el-menu-item-group>
+          <el-menu-item index="index">首页</el-menu-item>
+          <el-menu-item index="sys/user">用户信息</el-menu-item>
           <el-menu-item-group title="分组2">
             <el-menu-item index="1-3">选项3</el-menu-item>
           </el-menu-item-group>
@@ -41,16 +37,10 @@
 
       </el-menu>
     </div>
-
     <el-container>
       <el-header class="containerHeader">
         <div class="leftDiv">
-          <span>
-            <router-link to="/helloYt/index">
-              <i class="el-icon-house"></i>
-            </router-link>
-          </span>
-          <span @click="collapseTrans">
+          <span  @click="collapseChange" style="font-size:22px;"> <!-- 隐藏菜单栏按钮 -->
             <i class="el-icon-s-fold"></i>
           </span>
         </div>
@@ -58,24 +48,20 @@
           <span>
             <i class="el-icon-setting"></i>
           </span>
-          <el-dropdown>
+          <el-dropdown @command="dropdownAction">
             <span class="el-dropdown-link">
               <i class="el-icon-user">&nbsp;cww2</i>
             </span>
             <el-dropdown-menu slot="dropdown">
               <el-dropdown-item>个人信息</el-dropdown-item>
-              <el-dropdown-item>退出登录</el-dropdown-item>
+              <el-dropdown-item command="logout">退出登录</el-dropdown-item>
             </el-dropdown-menu>
           </el-dropdown>
         </div>
       </el-header>
-
       <el-main>
-
         <router-view/>
-
       </el-main>
-
     </el-container>
 
   </el-container>
@@ -85,17 +71,37 @@
 export default{
   data() {
     return {
-
+      isCollapse:false,
     }
-
-  },
-  mounted:function(){
-
   },
   methods:{
-    collapseTrans:function(){
-
+    collapseChange:function(){
+      this.isCollapse = !this.isCollapse;
+    },
+    dropdownAction:function(command){
+      if(command=='logout'){
+        this.$confirm('是否确认退出?', '退出登录', {
+          confirmButtonText: '确定',
+          cancelButtonText: '取消',
+          type: 'warning'
+        }).then(() => {
+          this.$message({
+            type: 'success',
+            message: '注销成功!'
+          });
+          this.$router.push({path:'/'});
+        }).catch(() => {
+        })
+      }
+    },
+    selectMenu:function(index,indexPath){
+      console.log('/'+indexPath[0]+'/'+indexPath[1])
+      this.$router.push({
+        path: '/'+indexPath[0]+'/'+indexPath[1]
+      })
     }
+  },
+  mounted:function(){
   },
 }
 </script>
@@ -118,13 +124,6 @@ export default{
     box-sizing: border-box;
     font-size: 16px;
   }
- /* 路由跳转样式
-  .containerHeader span a{
-    color: white;
-  }
-  .containerHeader span:hover a{
-    color:#0099ff;
-  }*/
   .containerHeader span:hover{
     color:#0099ff;
     border-top:3px solid #03a9f4ab
@@ -139,9 +138,11 @@ export default{
     background-color: #393D49;
     width: 200px;
     overflow-x: hidden;
+    transition: .4s;
   }
   .menuCollapse{
     width: 60px;
+    transition: .4s;
   }
 
   .containerAside .el-menu:not(.el-menu--collapse) {
@@ -166,6 +167,9 @@ export default{
 
   .el-carousel__item:nth-child(2n+1) {
     background-color: #d3dce6;
+  }
+  .el-menu-item.is-active{
+    background: rgb(43, 86, 120) !important
   }
   @media screen and (max-width: 480px) {
     .el-menu--collapse {

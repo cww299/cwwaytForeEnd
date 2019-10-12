@@ -24,7 +24,7 @@
                        align="center">
         <template slot-scope="scope">
           <el-button size="mini" @click="editUser(scope.$index, scope.row)">编辑</el-button>
-          <el-button size="mini" type="danger">删除</el-button>
+          <el-button size="mini" @click='deleUser(scope.$index)' type="danger">删除</el-button>
         </template>
       </el-table-column>
     </el-table>
@@ -91,6 +91,21 @@ export default {
       this.$router.replace('editUser')
       console.log(index)
       console.log(data)
+    },
+    deleUser: function(index){
+      this.$confirm('是否确认删除？','删除',{
+        confirmButtonText: '确定',
+        cancelButtonText: '取消',
+        type: 'warning'
+      }).then(() =>{
+        this.userData.splice(index,1);
+        this.$message({
+          type: 'success',
+          message: '删除成功!'
+        })
+      }).catch(()=>{
+
+      })
     }
   }
 }
