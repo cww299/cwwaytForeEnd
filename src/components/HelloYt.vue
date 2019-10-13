@@ -101,7 +101,6 @@ export default{
       }
     },
     selectMenu:function(index,indexPath){
-      console.log('/'+indexPath[0]+'/'+indexPath[1])
       this.$router.push({
         path: '/'+indexPath[0]+'/'+indexPath[1]
       })

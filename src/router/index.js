@@ -28,6 +28,12 @@ export default new Router({
         {
           path: 'sys/user',
           component: UserList,
+          name:'sysUserList',
+        },
+        {
+          path: 'sys/editUser',
+          component: EditUser,
+          name: 'sysEditUser',
         },
 
       ]
@@ -37,10 +43,5 @@ export default new Router({
       name: 'userList',
       component: UserList
     },
-    {
-      path: '/user/editUser',
-      name: 'editUser',
-      component: EditUser,
-    }
   ]
 })

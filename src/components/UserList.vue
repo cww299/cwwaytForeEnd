@@ -88,9 +88,14 @@ export default {
       this.submitForm('userForm');
     },
     editUser: function(index,data){
-      this.$router.replace('editUser')
-      console.log(index)
-      console.log(data)
+      this.$router.push({
+        name:'sysEditUser',
+        params: {
+          'id': '1',
+          'username': data.username,
+          'pwd': data.pwd,
+        },
+      })
     },
     deleUser: function(index){
       this.$confirm('是否确认删除？','删除',{
