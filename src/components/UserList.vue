@@ -124,7 +124,6 @@ export default {
         }).then((r)=>{
           r = r.data;
           if(r.code==0){
-            self.userData.splice(index,1);
             self.$message({
               type: 'success',
               message: r.msg,
