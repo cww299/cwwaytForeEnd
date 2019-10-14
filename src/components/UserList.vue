@@ -51,7 +51,7 @@
 </template>
 
 <script>
-  import axios from 'axios'
+import axios from 'axios'
 export default {
   name: 'HelloYt',
   data () {
@@ -103,15 +103,27 @@ export default {
       })
     },
     deleUser: function(index){
+      var self = this;
       this.$confirm('是否确认删除？','删除',{
         confirmButtonText: '确定',
         cancelButtonText: '取消',
         type: 'warning'
       }).then(() =>{
-        this.userData.splice(index,1);
-        this.$message({
-          type: 'success',
-          message: '删除成功!'
+        axios.get('/api/deleteUser',{
+          params:{
+            ids:self.userData[index].id
+          }
+        }).then((r)=>{
+          r = r.data;
+          if(r.code==0){
+            self.userData.splice(index,1);
+            self.$message({
+              type: 'success',
+              message: r.msg,
+            })
+            self.$options.methods.submitForm(self);
+          }else
+            this.$message.error(r.msg);
         })
       }).catch(()=>{
       })
