@@ -78,6 +78,7 @@ export default{
       user:{
         userName:'',
       },
+      currMenu:'',
     }
   },
   methods:{
@@ -101,6 +102,10 @@ export default{
       }
     },
     selectMenu:function(index,indexPath){
+      if(this.currMenu == indexPath)
+        return;
+      else
+        this.currMenu = indexPath;
       this.$router.push({
         path: '/'+indexPath[0]+'/'+indexPath[1]
       })
