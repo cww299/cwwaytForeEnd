@@ -34,7 +34,6 @@
           <i class="el-icon-setting"></i>
           <span slot="title">导航四</span>
         </el-menu-item>
-
       </el-menu>
     </div>
     <el-container>
@@ -63,6 +62,7 @@
         </div>
       </el-header>
       <el-main>
+        <div :class="[{'blackDiv':!isCollapse}]" @click="collapseChange()"></div>
         <router-view/>
       </el-main>
     </el-container>
@@ -156,7 +156,6 @@ export default{
     width: 60px;
     transition: .4s;
   }
-
   .containerAside .el-menu:not(.el-menu--collapse) {
     width: 217px;
     overflow-x: hidden;
@@ -197,7 +196,6 @@ export default{
     .el-menu--collapse {
       overflow: hidden;
     }
-
     .menuCollapse {
       width: 0px;
     }
