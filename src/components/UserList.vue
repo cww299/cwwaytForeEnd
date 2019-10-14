@@ -6,13 +6,15 @@
         <el-input v-model="userForm.username" placeholder="用户名"></el-input>
       </el-form-item>
       <el-form-item>
-        <el-button type="primary" @click="submitForm()">查询</el-button>
+        <el-button type="primary" @click="search()">查询</el-button>
+        <el-button @click="addUser()">新增</el-button>
       </el-form-item>
     </el-form>
     <el-row type="flex" class="row-bg" justify="space-around">
       <el-col :xs="24" :sm="24" :md="18" :lg="18" :xl="12">
         <div class="">
           <el-table :data="userData" border>
+            <el-table-column type="selection"></el-table-column>
             <el-table-column prop="id"
                              label="ID"
                              align="center"></el-table-column>
@@ -25,8 +27,8 @@
             <el-table-column label="操作"
                              align="center">
               <template slot-scope="scope">
-                <el-button size="mini" @click="editUser(scope.$index, scope.row)">编辑</el-button>
-                <el-button size="mini" @click='deleUser(scope.$index)' type="danger">删除</el-button>
+                <el-button size="mini" @click="editUser(scope.row)">编辑</el-button>
+                <el-button size="mini" @click='deleUser(scope.row)' type="danger">删除</el-button>
               </template>
             </el-table-column>
           </el-table>
@@ -83,6 +85,10 @@ export default {
         }
       })
     },
+    search: function(){
+      this.page.currPage = 1;
+      this.submitForm();
+    },
     trunSize: function(val){
       this.page.pageSize = val;
       this.page.currPage = 1;
@@ -92,17 +98,19 @@ export default {
       this.page.currPage = val;
       this.submitForm();
     },
-    editUser: function(index,data){
+    addUser:function(){
       this.$router.push({
         name:'sysEditUser',
-        params: {
-          'id': data.id,
-          'username': data.username,
-          'pwd': data.pwd,
-        },
+        params: {},
       })
     },
-    deleUser: function(index){
+    editUser: function(data){
+      this.$router.push({
+        name:'sysEditUser',
+        params: data,
+      })
+    },
+    deleUser: function(data){
       var self = this;
       this.$confirm('是否确认删除？','删除',{
         confirmButtonText: '确定',
@@ -111,7 +119,7 @@ export default {
       }).then(() =>{
         axios.get('/api/deleteUser',{
           params:{
-            ids:self.userData[index].id
+            ids:data.id
           }
         }).then((r)=>{
           r = r.data;

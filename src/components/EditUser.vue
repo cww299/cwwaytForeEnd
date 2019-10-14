@@ -13,7 +13,7 @@
             <el-input v-model="user.pwd"></el-input>
           </el-form-item>
           <el-form-item>
-            <el-button type="primary" @click="update('user')">修改</el-button>
+            <el-button type="primary" @click="update('user')">保存</el-button>
             <el-button @click="back">返回</el-button>
           </el-form-item>
         </el-form>
@@ -51,6 +51,7 @@ export default  {
                 message: r.msg,
                 type: 'success',
               })
+              self.user = r.data;
             }else{
               self.$message.error(r.msg);
             }
