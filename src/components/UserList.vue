@@ -6,7 +6,7 @@
         <el-input v-model="userForm.username" placeholder="用户名"></el-input>
       </el-form-item>
       <el-form-item>
-        <el-button type="primary" @click="submitForm('userForm')">查询</el-button>
+        <el-button type="primary" @click="submitForm()">查询</el-button>
       </el-form-item>
     </el-form>
     <el-row type="flex" class="row-bg" justify="space-around">
@@ -69,31 +69,28 @@ export default {
     }
   },
   mounted: function(){
+    this.$options.methods.submitForm(this);
   },
   methods: {
-    submitForm: function(formName){
-      var self = this;
-      this.$refs[formName].validate((verify)=>{
-        if(verify){
-          axios.get('/api/listUserPage?size='+self.page.pageSize+'&page='+self.page.currPage,{
-            params: self.userForm  }).then((r)=>{
-            r = r.data;
-            if(r.code === 0){
-              self.userData = r.data.rows;
-              self.page.total = r.data.total;
-            }
-          })
+    submitForm: function(s){
+      var self = s || this;
+      axios.get('/api/listUserPage?size='+self.page.pageSize+'&page='+self.page.currPage,{
+        params: self.userForm  }).then((r)=>{
+        r = r.data;
+        if(r.code === 0){
+          self.userData = r.data.rows;
+          self.page.total = r.data.total;
         }
       })
     },
     trunSize: function(val){
       this.page.pageSize = val;
       this.page.currPage = 1;
-      this.submitForm('userForm');
+      this.submitForm();
     },
     jumpPage: function(val){
       this.page.currPage = val;
-      this.submitForm('userForm');
+      this.submitForm();
     },
     editUser: function(index,data){
       this.$router.push({
