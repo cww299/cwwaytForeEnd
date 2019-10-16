@@ -39,6 +39,8 @@ export default  {
       }
     }
   },
+  mounted:function(){
+  },
   methods:{
     update: function(user){
       var self = this;
@@ -65,9 +67,7 @@ export default  {
     })
     }
   },
-  mounted:function(){
-
-  }
+ 
 }
 </script>
 

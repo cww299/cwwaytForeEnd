@@ -39,8 +39,11 @@
     <el-container>
       <el-header class="containerHeader">
         <div class="leftDiv">
-          <span  @click="collapseChange" :class="[{'collapseIcon': isCollapse }]" style="font-size:22px;"> <!-- 隐藏菜单栏按钮 -->
-            <i class="el-icon-s-fold"></i>
+          <span  @click="collapseChange" style="font-size:22px;">
+            <i :class="[{'el-icon-s-fold': !isCollapse,'el-icon-s-unfold':isCollapse }]" ></i>
+          </span>
+          <span>
+            <i class="el-icon-s-home" ></i>
           </span>
         </div>
         <div class="rightDiv">
@@ -52,7 +55,7 @@
           </span>
           <el-dropdown @command="dropdownAction">
             <span class="el-dropdown-link">
-              <i class="el-icon-user">&nbsp;{{user.userName}}</i>
+              <i class="el-icon-user">&nbsp;{{user.username}}</i>
             </span>
             <el-dropdown-menu slot="dropdown">
               <el-dropdown-item>个人信息</el-dropdown-item>
@@ -75,11 +78,11 @@ export default{
   data() {
     return {
       isCollapse:false,
-      user:{
-        userName:'',
-      },
+      user: this.$route.params,
       currMenu:'',
     }
+  },
+  mounted:function(){
   },
   methods:{
     collapseChange:function(){
@@ -113,9 +116,7 @@ export default{
     fullScreen:function(){
     }
   },
-  mounted:function(){
-    this.user = this.$route.query;
-  },
+  
 }
 </script>
 <style>
@@ -181,16 +182,6 @@ export default{
   }
   .el-menu-item.is-active{
     background: rgb(43, 86, 120) !important
-  }
-  .collapseIcon{
-    transform: rotate(180deg) !important;
-    display: inline-block;
-    padding: 0px 15px !important
-  }
-  .collapseIcon:hover {
-    border-top:0 !important;
-    box-sizing: box-sizing;
-    border-bottom: 3px solid #03a9f4ab !important;
   }
   @media screen and (max-width: 480px) {
     .el-menu--collapse {

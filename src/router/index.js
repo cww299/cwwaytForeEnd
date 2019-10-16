@@ -23,6 +23,7 @@ export default new Router({
       children:[
         {
           path: 'index',
+          name: 'helloYtIndex',
           component: Index,
         },
         {
